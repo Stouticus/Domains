@@ -1,11 +1,17 @@
 extends Node
+class_name Team
 
+@export var max_size: int = 5
+var members: Array = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func add_member(recruit: Recruit):
+	var m = Member.new()
+	m.member_name = recruit.name
+	m.domain = recruit.domain
+	m.rank = recruit.rank
+	m.stats = recruit.base_stats.duplicate()
+	m.health = recruit.base_stats.get("HP", 5)
+	members.append(m)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func is_full() -> bool:
+	return members.size() >= max_size

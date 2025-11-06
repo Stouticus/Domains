@@ -1,11 +1,33 @@
+# res://scripts/utilities/stat_utils.gd
 extends Node
+class_name StatUtils
 
+static func scale_stats(base_stats: Dictionary, rank: int) -> Dictionary:
+	var stats = base_stats.duplicate()
+	for key in stats.keys():
+		stats[key] += rank - 1
+	return stats
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func rarity_stat_bonus(rarity: String) -> int:
+	match rarity:
+		"Common":
+			return 0
+		"Uncommon":
+			return 1
+		"Rare":
+			return 2
+		"Epic":
+			return 3
+	return 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func rarity_cost_modifier(rarity: String) -> int:
+	match rarity:
+		"Common":
+			return 0
+		"Uncommon":
+			return 2
+		"Rare":
+			return 4
+		"Epic":
+			return 6
+	return 0
