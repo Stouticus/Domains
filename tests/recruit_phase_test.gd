@@ -4,6 +4,7 @@ func _ready():
 	var campaign = Campaign.new()
 	var player = Player.new()
 	player.player_name = "Player 1"
+	player.money = 25
 	campaign.player = player
 	add_child(campaign)
 	campaign.start_recruit_phase()
@@ -14,8 +15,7 @@ func _ready():
 
 	print("\n--- Player Team ---")
 	for m in player.team.members:
-		print("- %s | Domain: %s | Rank: %d | HP: %d" %
-			[m.member_name, m.domain, m.rank, m.health])
+		m.print_info()
 	print("Player Money: %d" % player.money)
 	
 		# Hire the first recruit
@@ -24,6 +24,5 @@ func _ready():
 
 	print("\n--- Player Team ---")
 	for m in player.team.members:
-		print("- %s | Domain: %s | Rank: %d | HP: %d" %
-			[m.member_name, m.domain, m.rank, m.health])
+		m.print_info()
 	print("Player Money: %d" % player.money)
