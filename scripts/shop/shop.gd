@@ -6,11 +6,11 @@ class_name Shop
 var pool: Array = []  # Current recruit pool
 
 # Generate a new pool of recruits
-func generate_pool():
+func generate_pool(level: int):
 	pool.clear()
 	for i in range(pool_size):
 		var r = Recruit.new()
-		r.randomize_stats()
+		r.randomize_stats(level)
 		pool.append(r)
 
 # Player tries to hire a recruit at index

@@ -26,21 +26,21 @@ func start_turn():
 	show_phase_info()
 
 # --- Recruit Phase ---
-func start_recruit_phase():
+func start_recruit_phase(team_level: int):
 	current_phase = Phase.RECRUIT
 	print("\n--- Recruit Phase ---")
-	shop.generate_pool()
+	shop.generate_pool(team_level)
 	print("Available recruits:")
 	for i in range(shop.pool.size()):
 		var r = shop.pool[i]
-		print("%d: %s | Domain: %s | Rank: %d | Rarity: %s | Cost: %d" %
-			[i, r.name, r.domain, r.rank, r.rarity, r.cost])
+		print("%d: %s | Domain: %s %s | Level: %d | Rarity: %s | Cost: %d" %
+			[i, r.name, r.domain1, r.domain2, r.level, r.rarity, r.cost])
 			
 # Display phase info and trigger actions
 func show_phase_info():
 	match current_phase:
-		Phase.RECRUIT:
-			self.start_recruit_phase()
+		#Phase.RECRUIT:
+			#self.start_recruit_phase()
 		Phase.POSITIONING:
 			print("Positioning Phase: Arrange your Team on the Board.")
 			# Placeholder for positioning logic
@@ -62,6 +62,6 @@ func generate_opponent_team() -> Team:
 	# Example: fill with 3 random recruits
 	for i in range(3):
 		var r = Recruit.new()
-		r.randomize_stats()
+		r.randomize_stats(team.get_level())
 		team.add_member(r)
 	return team
